@@ -1,6 +1,6 @@
 import sys
 
-class PartitionEnumerator:
+class PartitionEnum:
 
     def __init__(self, n, k):
         self.n = n
@@ -31,7 +31,7 @@ class PartitionEnumerator:
 
             # Very first time
             if self.sub == None:
-                self.sub = PartitionEnumerator(self.n - 1, self.k - 1)
+                self.sub = PartitionEnum(self.n - 1, self.k - 1)
 
             if self.sub.hasNext:
                 partition = self.sub.getNext()
@@ -39,7 +39,7 @@ class PartitionEnumerator:
                 return partition
             else:
                 self.nAlone = False
-                self.sub = PartitionEnumerator(self.n - 1, self.k)
+                self.sub = PartitionEnum(self.n - 1, self.k)
 
         # Done with partitions in which n is by itself
         partition = self.sub.getNext()
@@ -51,14 +51,14 @@ class PartitionEnumerator:
         if not self.sub.hasNext:
             if self.counter < self.k - 1:
                 self.counter += 1
-                self.sub = PartitionEnumerator(self.n - 1, self.k)
+                self.sub = PartitionEnum(self.n - 1, self.k)
             else:
                 self.hasNext = False
 
         return partition
 
 def main():
-    enum = PartitionEnumerator(int(sys.argv[1]), int(sys.argv[2]))
+    enum = PartitionEnum(int(sys.argv[1]), int(sys.argv[2]))
     while enum.hasNext:
         print enum.getNext()
 
