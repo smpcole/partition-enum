@@ -5,9 +5,10 @@ class PartitionEnum:
     def __init__(self, n, k):
         self.n = n
         self.k = k
-        self.hasNext = (k <= n)
+        self.reset();
 
-        # Private
+    def reset(self):
+        self.hasNext = (self.k <= self.n)
         self.sub = None
         self.nAlone = True
         self.counter = 0

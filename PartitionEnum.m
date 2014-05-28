@@ -15,11 +15,15 @@ classdef PartitionEnum < handle
 	function this = PartitionEnum(n, k)
 	    this.n = n;
 	    this.k = k;
-	    this.hasNext = (k <= n);
-	    this.sub = 0;
-	    this.nAlone = true;
-	    this.counter = 1;
+		this.reset();
 	end
+
+    function reset(this)
+        this.hasNext = (this.k <= this.n);
+		this.sub = 0;
+		this.nAlone = true;
+		this.counter = 1;
+    end
 
 	function partition = getNext(this)
 %	    partition = {};
