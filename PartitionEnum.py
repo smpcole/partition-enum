@@ -10,6 +10,7 @@ class PartitionEnum:
     def reset(self):
         self.hasNext = (self.k <= self.n)
         self.sub = None
+        self.index = 0 # Number of partitions that have been generated so far
         self.nAlone = True
         self.counter = 0
 
@@ -18,6 +19,8 @@ class PartitionEnum:
         if not self.hasNext:
             return None
         
+        self.index += 1
+
         # Base cases
         if self.k == 1:
             self.hasNext = False
@@ -62,6 +65,7 @@ def main():
     enum = PartitionEnum(int(sys.argv[1]), int(sys.argv[2]))
     while enum.hasNext:
         print enum.getNext()
+    print enum.index
 
 if __name__ == "__main__":
     main()

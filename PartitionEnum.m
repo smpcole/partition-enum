@@ -3,6 +3,7 @@ classdef PartitionEnum < handle
         n
 	k
 	hasNext
+    index
 
 	% Private
 	sub
@@ -23,6 +24,7 @@ classdef PartitionEnum < handle
 		this.sub = 0;
 		this.nAlone = true;
 		this.counter = 1;
+                this.index = 0;
     end
 
 	function partition = getNext(this)
@@ -31,6 +33,8 @@ classdef PartitionEnum < handle
 	        partition = {};
 		return;
 	    end
+
+        this.index = this.index + 1;
 			
 	    % Base cases
 	    if this.k == 1
@@ -90,6 +94,7 @@ classdef PartitionEnum < handle
 		end
 		fprintf('\n');
 	    end
+        display(this.index);
 	end
 
     end
