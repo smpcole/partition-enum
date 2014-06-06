@@ -14,6 +14,16 @@ class PartitionEnum:
         self.nAlone = True
         self.counter = 0
 
+    def numPartitions(self):
+        """Compute number of k-partitions of [n] (i.e., Stirling number of 2nd kind) via dynamic programming.  Takes O(n) time and O(n) space."""
+        table = [0];
+        for n in xrange(1, self.n + 1):
+            table.append(1)
+            # n == len(table) - 1
+            for k in reversed(xrange(2, n)):
+                table[k] = table[k - 1] + k * table[k]
+        return table[self.k]
+
     def getNext(self):
 
         if not self.hasNext:
@@ -65,7 +75,7 @@ def main():
     enum = PartitionEnum(int(sys.argv[1]), int(sys.argv[2]))
     while enum.hasNext:
         print enum.getNext()
-    print enum.index
+    assert enum.index == enum.numPartitions()
 
 if __name__ == "__main__":
     main()
