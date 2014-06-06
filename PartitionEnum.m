@@ -22,9 +22,9 @@ classdef PartitionEnum < handle
     % Compute number of k-partitions of [n] (i.e., Stirling number of 2nd kind)
     % via dynamic programming.  Takes O(n) time and space
     function S = numPartitions(this)
-        table = ones(this.n);
+        table = ones(1, this.n);
         for n = 1 : this.n
-            for k = fliplr(1 : n - 1)
+            for k = fliplr(2 : n - 1)
                 table(k) = table(k - 1) + k * table(k);
             end
         end
