@@ -31,6 +31,21 @@ classdef PartitionEnum < handle
 		S = table(this.k);
     end
 
+    function partition = getRandom(this)
+        % Randomly order the numbers
+        order = randperm(this.n);
+        for i = 1 : this.n
+            if i <= this.k
+                % Assign first k numbers to their own parts
+                partition{i} = order(i);
+            else
+                % Assign remaining vertices randomly
+                part = randi(this.k, 1, 1);
+                partition{part} = [partition{part}, order(i)];
+            end
+        end
+    end
+
     function reset(this)
         this.hasNext = (this.k <= this.n);
 		this.sub = 0;

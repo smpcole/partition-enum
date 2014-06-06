@@ -1,4 +1,5 @@
 import sys
+import random
 
 class PartitionEnum:
 
@@ -13,6 +14,23 @@ class PartitionEnum:
         self.index = 0 # Number of partitions that have been generated so far
         self.nAlone = True
         self.counter = 0
+
+    def getRandom(self):
+        order = range(1, self.n + 1)
+        # Randomly order the numbers
+        random.shuffle(order)
+        partition = [[] for i in xrange(self.k)]
+        for i in xrange(self.n):
+            part = None
+            if i < self.k:
+                # Place first k in their own parts
+                part = i
+            else:
+                # Randomly assign other vertices
+                part = random.randint(0, self.k - 1)
+            partition[part].append(order[i])
+        return partition
+            
 
     def numPartitions(self):
         """Compute number of k-partitions of [n] (i.e., Stirling number of 2nd kind) via dynamic programming.  Takes O(n) time and O(n) space."""
